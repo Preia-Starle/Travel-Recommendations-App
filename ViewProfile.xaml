@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Assignment7Rebuilt.ViewProfile"
+             Title="View Profile">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Grid">
+                <Setter Property="BackgroundColor" Value="DarkGray" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="Margin" Value="0,0,0,15" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout>
+        <Frame Margin="0,0,0,10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0" Style="{StaticResource GridStyle}" Orientation="Horizontal">
+                    <Label Text="Username: " />
+                    <Label Text="{Binding UserName}" />
+                </StackLayout>
+                <StackLayout Grid.Row="1" Style="{StaticResource GridStyle}" Orientation="Horizontal">
+                    <Label Text="Email: " />
+                    <Label Text="{Binding Email}" />
+                </StackLayout>
+                <StackLayout Grid.Row="2" Style="{StaticResource GridStyle}" Orientation="Horizontal">
+                    <Label Text="City: " />
+                    <Label Text="{Binding City}" />
+                </StackLayout>
+                <StackLayout Grid.Row="3" Style="{StaticResource GridStyle}" Orientation="Horizontal">
+                    <Label Text="About me: " />
+                    <Label Text="{Binding AboutMe}" />
+                </StackLayout>
+                <StackLayout Grid.Row="4" Style="{StaticResource GridStyle}" Orientation="Horizontal">
+                    <Label Text="Interests: " />
+                    <Label Text="{Binding Interests}" />
+                </StackLayout>
+            </Grid>
+        </Frame>
+        <Button Text="Edit Profile" Clicked="OnEditProfileClicked" />
+    </StackLayout>
+</ContentPage>

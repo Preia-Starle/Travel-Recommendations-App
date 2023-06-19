@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Assignment7Rebuilt"
+             x:Class="Assignment7Rebuilt.EditRecommendationForm"
+             Title="EditRecommendationForm">
+    <ContentPage.Resources>
+        <local:StorageManager x:Key="database" />
+    </ContentPage.Resources>
+
+    <StackLayout Padding="20">
+        <Label Text="Title:" />
+        <Entry x:Name="entryTitle" Text="{Binding RecommendationTitle}" />
+
+        <Label Text="Location:" />
+        <Entry x:Name="entryLocation" Text="{Binding Location}" />
+
+        <Label Text="Country:" />
+        <Picker x:Name="countryPicker" SelectedItem="{Binding Country}" />
+
+        <Label Text="Description:" />
+        <Editor x:Name="editorDescription" Text="{Binding RecommendationDescription}" HeightRequest="100" />
+
+        <Button Text="Save" Clicked="OnSaveRecommendationClicked" />
+    </StackLayout>
+</ContentPage>

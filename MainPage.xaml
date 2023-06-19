@@ -1,0 +1,95 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Assignment7Rebuilt.MainPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+            <Style x:Key="GridStyle" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Headline -->
+            <Label Text="Travel With Locals" FontSize="Title" HorizontalOptions="Center" Grid.Row="0" />
+            <Label Text="Travel Recommendations from Locals" FontSize="Subtitle" HorizontalOptions="Center" Grid.Row="1" />
+
+            <!-- Navigation Buttons -->
+            <StackLayout Orientation="Horizontal" Spacing="10" Grid.Row="2">
+                <Button Text="Create Recommendation" Clicked="OnCreateRecommendationClick" HorizontalOptions="Start" />
+                <Button Text="My Recommendations" Clicked="OnMyRecommendationsClick" HorizontalOptions="Start" />
+                <Button Text="Favorites" Clicked="OnFavoritesClick" HorizontalOptions="Start" />
+                <Button Text="Create Profile" Clicked="OnCreateProfileClick" HorizontalOptions="EndAndExpand" />
+                <Button Text="View Profile" Clicked="OnViewProfileClick" HorizontalOptions="End" />
+                <Button Text="Log In" Clicked="OnLoginClick" HorizontalOptions="End" />
+                <Button Text="Log Out" Clicked="OnLogoutClicked" HorizontalOptions="End" />
+            </StackLayout>
+
+            <StackLayout Grid.Row="3">
+                <!-- CollectionView to display published recommendations -->
+                <CollectionView ItemsSource="{Binding PublishedRecommendations}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Margin="0,0,0,10" HasShadow="False">
+                                <StackLayout BackgroundColor="DarkGray" Padding="10">
+                                    <StackLayout Style="{StaticResource GridStyle}">
+                                        <Label Text="Title: " />
+                                        <Label Text="{Binding RecommendationTitle}" />
+                                    </StackLayout>
+                                    <StackLayout Style="{StaticResource GridStyle}">
+                                        <Label Text="Location: " />
+                                        <Label Text="{Binding Location}" />
+                                    </StackLayout>
+                                    <StackLayout Style="{StaticResource GridStyle}">
+                                        <Label Text="Country: " />
+                                        <Label Text="{Binding CountryText}" />
+                                    </StackLayout>
+                                    <StackLayout Style="{StaticResource GridStyle}">
+                                        <Label Text="Description: " />
+                                        <Label Text="{Binding RecommendationDescription}" />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="10">
+                                        <Grid BackgroundColor="Transparent" Padding="10,5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Button Grid.Column="0" Text="Save/Drop Favorite" Clicked="OnSaveAsFavoriteClicked" CommandParameter="{Binding .}" />
+                                        </Grid>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="10">
+                                        <Entry x:Name="commentEntry" AutomationId="CommentEntry" Placeholder="Write a comment" />
+                                        <Button Text="Submit" Clicked="OnSubmitCommentClicked" HorizontalOptions="Start" VerticalOptions="Center" HeightRequest="40" WidthRequest="100" CommandParameter="{Binding .}" />
+                                    </StackLayout>
+                                    <Label Text="Comments" FontSize="14" TextColor="White" />
+                                    <ListView BackgroundColor="DarkGray" ItemsSource="{Binding Comments}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackLayout>
+                                                    <Label Text="{Binding CommentText}" />
+                                                    <Label Text="{Binding CreatedAt, StringFormat='[{0:yyyy-MM-dd HH:mm:ss}]'}" />
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

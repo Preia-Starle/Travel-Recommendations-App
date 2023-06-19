@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Assignment7Rebuilt"
+             x:Class="Assignment7Rebuilt.ProfileForm"
+             Title="Profile Form">
+    <ContentPage.Resources>
+        <local:StorageManager x:Key="database" />
+    </ContentPage.Resources>
+
+    <StackLayout Padding="20">
+        <Label Text="Username:" />
+        <Entry x:Name="entryUsername" Placeholder="Enter your name" />
+
+        <Label Text="Password:" />
+        <Entry x:Name="entryPassword" Placeholder="Enter your password" IsPassword="true" />
+
+
+        <Label Text="Email:" />
+        <Entry x:Name="entryEmail" Placeholder="Enter your email" />
+
+        <Label Text="City:" />
+        <Entry x:Name="entryCity" Placeholder="Enter the city you live in" />
+
+        <Label Text="About Me:" />
+        <Entry x:Name="entryAboutMe" Placeholder="Enter whatever you find interesting about you" />
+
+        <Label Text="Interests:" />
+        <StackLayout Orientation="Horizontal">
+            <Entry x:Name="interestEntry" Placeholder="Enter interest" />
+
+            <Button Text="Add" Clicked="OnAddInterestClicked" HorizontalOptions="Start" VerticalOptions="Center" HeightRequest="35" WidthRequest="60" />
+
+        </StackLayout>
+
+        <ListView x:Name="interestsListView" ItemsSource="{Binding SelectedInterests}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Spacing="5" Padding="5">
+                            <Label Text="{Binding}" VerticalOptions="Center" />
+                            <Button Text="X" Clicked="OnDeleteInterestClicked" CommandParameter="{Binding .}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Text="Submit form" Clicked="OnSubmitClicked"></Button>
+    </StackLayout>
+</ContentPage>
